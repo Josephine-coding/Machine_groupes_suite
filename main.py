@@ -1,5 +1,8 @@
 # Brief Retour sur la machine à groupes
 
+#! /usr/bin/env python3
+# coding: utf-8
+
 import numpy as np
 import os
 import json
@@ -286,55 +289,60 @@ def getHistory() :
                 print(learner, sep=", ")
 
 
-run = True
-groups = []
+def main():
+    # Ici on doit mettre toutes les instructions lancées dans le fichier
+    run = True
+    groups = []
 
-print("Welcome in group generator 0.1\nsend help to see our commands !\nHave fun\n")
+    print("Welcome in group generator 0.1\nsend help to see our commands !\nHave fun\n")
 
-while run:
-    inp = input().lower()
+    while run:
+        inp = input().lower()
 
-    if inp == 'quit':
-        print("bye")
-        run = False
-    elif inp == "help":
-        helps()
-    elif inp == "edit":
-        edit()
-    elif inp == "print":
-        printLearners()
-    elif inp == "remove":
-        removeLearner()
-    elif inp == "add":
-        addLearner()
-    elif inp == "create comp":
-        print("group size :")
-        size = input()
-        print("add filtre : \n1: none\n2 : Heterogene\n3 : Homogene")
-        filtre = input()
-        groups = getGroups(int(size), int(filtre))
-        printGroups(groups)
-        print("save groups ? (Y/N)")
-        rep = input().lower()
-        if rep == 'y':
-            saveGroups(groups)
-            historyGroup.append(groups)
-            print("group saved\n")
-    elif inp == "create history":
-        print("enter group size :")
-        size = input()
-        groups = getHistoryGroup(int(size))
-        printGroups(groups)
-        print("save groups ? (Y/N)")
-        rep = input().lower()
-        if rep == 'y':
-            saveGroups(groups)
-            historyGroup.append(groups)
-            print("group saved\n")
+        if inp == 'quit':
+            print("bye")
+            run = False
+        elif inp == "help":
+            helps()
+        elif inp == "edit":
+            edit()
+        elif inp == "print":
+            printLearners()
+        elif inp == "remove":
+            removeLearner()
+        elif inp == "add":
+            addLearner()
+        elif inp == "create comp":
+            print("group size :")
+            size = input()
+            print("add filtre : \n1: none\n2 : Heterogene\n3 : Homogene")
+            filtre = input()
+            groups = getGroups(int(size), int(filtre))
+            printGroups(groups)
+            print("save groups ? (Y/N)")
+            rep = input().lower()
+            if rep == 'y':
+                saveGroups(groups)
+                historyGroup.append(groups)
+                print("group saved\n")
+        elif inp == "create history":
+            print("enter group size :")
+            size = input()
+            groups = getHistoryGroup(int(size))
+            printGroups(groups)
+            print("save groups ? (Y/N)")
+            rep = input().lower()
+            if rep == 'y':
+                saveGroups(groups)
+                historyGroup.append(groups)
+                print("group saved\n")
+            else:
+                groups = []
+        elif inp == "show":
+            printGroups(groups)
         else:
-            groups = []
-    elif inp == "show":
-        printGroups(groups)
-    else:
-        pass
+            pass
 
+
+if __name__ == "__main__":
+    main()
